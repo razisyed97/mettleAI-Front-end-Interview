@@ -59,6 +59,35 @@
     width: 90%;
     margin-top: 20px;
     margin-bottom: 20px;
+    min-height: 48px;
     display: flex;
     justify-content: space-between;
+    position: relative;
+}
+
+.location-search-input{
+    width: inherit;
+}
+
+.autocomplete-dropdown-container{
+    position: absolute;
+    z-index: 1;
+    height: fit-content;
+    width: 100%;
+    max-height: 120px;
+    overflow-y: scroll;
+    background: white;
+}
+
+.suggestion-item{
+    margin: 0px;
+    padding: 10px;
+    position: relative;
+}
+
+.suggestion-item--active{
+    margin: 0px;
+    padding: 10px;
+    position: relative;
+
 }
