@@ -1,0 +1,64 @@
+.referral-div{
+    width: 100%;
+    flex: 1;
+    min-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+    align-items: center;
+    margin-bottom: 150px;
+}
+
+.referral-title{
+    text-align: center;
+    color: #0B2B5B;
+    line-height: 8px;
+    margin: 20px;
+}
+
+.referral-forms{
+    width: 60%;
+}
+
+.panelcard-name{
+    height: inherit;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+.panelcard-filler{
+    flex: 1;
+}
+
+.panelcard-icon{
+    height: inherit;
+    width: 40px;
+    background: #25A575;
+    border-top-left-radius: 4px;
+}
+.panelcard-trash{
+    z-index: 100;
+}
+
+.panelcard-form{
+    width: 100%;
+    height: fit-content;
+    margin-left: 40px;
+    margin-right: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.panelcard-textfield-sm{
+    width: 45%;
+}
+
+.panelcard-textfield-lg{
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}

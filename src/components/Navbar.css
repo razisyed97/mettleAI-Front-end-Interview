@@ -1,0 +1,23 @@
+.navbar-div{
+    height: 150px;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    color: #0B2B5B;
+}
+
+.navbar-content{
+    text-align: center;
+}
+
+@media only screen and (max-width: 500px) {
+    .navbar-content h2{
+        font-size: 20px;
+    }
+    .navbar-content h3{
+        font-size: 17px;
+    }
+  }
