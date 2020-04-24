@@ -76,6 +76,16 @@ class Card extends Component{
             }
         }
     }
+
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.formData !== prevState.data){
+          return { data: nextProps.formData, address : nextProps.formData.address};
+       }
+       else return null;
+    }
+
+
     handleChange = address => {
         var temp = {}
         temp.target = {}
@@ -100,10 +110,12 @@ class Card extends Component{
         var data = this.state.data
         const possibilities = ["FirstName", "LastName", "DateofBirth", "ContactLanguage", "Phone", "Email", "Address", "Notes/Reason"]
         //console.log(field)
+        console.log(data)
         if (possibilities.includes(field)){
             for (let [key, value] of Object.entries(data)) {
                 if (key.toLowerCase() == field.toLowerCase()){
-                    //console.log("hi")
+                    console.log("hi")
+                    console.log(newData)
                     data[key] = newData
                 }
                 if (field.toLowerCase() == "notes/reason"){
@@ -111,8 +123,8 @@ class Card extends Component{
                 }
             }
         }
-        this.setState({data : data})
-        //console.log(data)
+        //this.setState({data : data})
+        console.log(data)
         this.props.updateForms(data, this.props.colour)
     }
 
@@ -132,7 +144,7 @@ class Card extends Component{
                     <div className="panelcard-icon" style={{background : colours[this.props.colour]}}>
                         {this.props.colour + 1}
                     </div>
-                    <div className="panelcard-name">Hello</div>
+                    <div className="panelcard-name">{this.props.formData.firstName ? this.props.formData.firstName : "New Referral"}</div>
                     <div className="panelcard-filler"></div>
                     <div className="panelcard-trash">
                         <IconButton 
@@ -154,7 +166,7 @@ class Card extends Component{
                                 <TextField
                                 color="primary"
                                 required
-                                value={this.props.formData.firstName || ""}
+                                value={this.props.formData.firstName}
                                 label="required"
                                 placeholder="First Name"
                                 fullWidth
@@ -170,9 +182,8 @@ class Card extends Component{
                             </div>
                             <div className="panelcard-textfield-sm">
                                 <TextField
-                                value={this.props.formData.lastName || ""}
+                                value={this.props.formData.lastName}
                                 required
-                                id="standard-required"
                                 label="required"
                                 placeholder="Last Name"
                                 fullWidth
@@ -190,10 +201,9 @@ class Card extends Component{
                         <div className="panelcard-textfield-lg">
                             <div className="panelcard-textfield-sm">
                                 <TextField
-                                value={this.props.formData.dateOfBirth || ""}
+                                value={this.props.formData.dateOfBirth}
                                 required
                                 label="required"
-                                id="standard-required"
                                 placeholder="Date of Birth"
                                 fullWidth
                                 onChange={(e) => this.updateData(e)}
@@ -208,7 +218,7 @@ class Card extends Component{
                             </div>
                             <div className="panelcard-textfield-sm">
                                 <TextField
-                                value={this.props.formData.contactLanguage || ""}
+                                value={this.props.formData.contactLanguage}
                                 required
                                 label="required"
                                 id="standard-required"
@@ -228,7 +238,7 @@ class Card extends Component{
                         <div className="panelcard-textfield-lg">
                             <div className="panelcard-textfield-sm">
                                 <TextField
-                                value={this.props.formData.phone || ""}
+                                value={this.props.formData.phone}
                                 required
                                 label="required"
                                 id="standard-required"
@@ -246,7 +256,7 @@ class Card extends Component{
                             </div>
                             <div className="panelcard-textfield-sm">
                                 <TextField
-                                value={this.props.formData.email || ""}
+                                value={this.props.formData.email}
                                 required
                                 label="required"
                                 id="standard-required"
@@ -274,7 +284,7 @@ class Card extends Component{
                                 <TextField
                                 label="required"
                                 required
-                                value={this.props.formData.address || ""}
+                                value={this.state.address ? this.state.address : this.props.formData.address}
                                 id="standard-required"
                                 autoComplete="off"
                                 onChange={(e) => this.updateData(e)}
@@ -318,24 +328,14 @@ class Card extends Component{
                         </PlacesAutocomplete>
                         </div> 
                         <div className="panelcard-textfield-lg">
-                        <Autocomplete
-                        freeSolo
-                        id="free-solo-2-demo"
-                        disableClearable
-                        options={this.state.autocomplete.map((option) => option)}
-                        fullWidth
-                        renderInput={(params) => (
                             <TextField
-                            value={this.props.formData.notesReason || ""}
-                            {...params}
+                            value={this.props.formData.notesReason}
                             id="standard-textarea"
                             placeholder="Notes/Reason"
                             fullWidth
                             onChange={(e) => this.updateData(e)}
-                            InputProps={{ ...params.InputProps, type: 'search' }}
                             />
-                        )}
-                        />
+
                         </div>
                     </form>
                 </ExpansionPanelDetails>

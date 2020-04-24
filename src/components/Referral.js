@@ -11,12 +11,12 @@ class Referral extends Component {
                 {
                     firstName : "",
                     lastName : "",
-                    dob : "",
-                    langauge : "",
+                    dateOfBirth : "",
+                    contactLanguage : "",
                     phone : "",
                     email : "",
                     address : "",
-                    notes : ""
+                    notesReason : ""
                 }
             ]
         }
@@ -28,12 +28,12 @@ class Referral extends Component {
             array.push({
                 firstName : "",
                 lastName : "",
-                dob : "",
-                langauge : "",
+                dateOfBirth : "",
+                contactLanguage : "",
                 phone : "",
                 email : "",
                 address : "",
-                notes : ""
+                notesReason : ""
             })
             this.setState(prevState => ({
                 formData:  array
@@ -62,6 +62,7 @@ class Referral extends Component {
         // 2. Make a shallow copy of the item you want to mutate
         let item = {...items[formNum]};
         // 3. Replace the property you're intested in
+        console.log(data)
         item = data;
         // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
         items[formNum] = item;
@@ -74,6 +75,7 @@ class Referral extends Component {
     }
 
     render(){
+        console.log(this.state.formData)
         return (
             <div className="referral-div">
                 <div className="referral-title">
