@@ -13,12 +13,14 @@
 - More specific error message alert regarding missing required fields
 - Add button animations for adding, sending, and deleting a form
 - Create a more user friendly experience when using autocomplete to fill in address field
+- Hide my api key when deploying
 
 ## How to run
 
 1. Make sure to have node runtime environment configured properly with node package manager as this is needed to install dev dependencies
+Use this if not installed already: https://treehouse.github.io/installation-guides/windows/node-windows.html
 
-2. Clone repo
+2. Clone repo to your computer
 
 3. Cd into the root folder where package.json is located through the terminal.
 
