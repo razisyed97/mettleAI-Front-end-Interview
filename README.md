@@ -25,3 +25,5 @@
 4. Run: npm install (this will likely take some time)
 
 5. Run: npm start
+
+if an error occurs about a dependency not being install. Run: npm install <the dependency>
