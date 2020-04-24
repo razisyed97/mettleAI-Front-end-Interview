@@ -33,8 +33,11 @@
 .panelcard-icon{
     height: inherit;
     width: 40px;
-    background: #25A575;
     border-top-left-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 .panelcard-trash{
     z-index: 100;
@@ -90,4 +93,39 @@
     padding: 10px;
     position: relative;
 
+}
+
+.add-button{
+    width: 60%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    color: #0B2B5B;
+    font-weight: 500;
+    height: 48px;
+    align-items: center;
+    margin: 10px;
+}
+
+.add-button:hover{
+    cursor: pointer;
+}
+
+.send-button{
+    width: 60%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    background: #0B2B5B;
+    font-weight: 500;
+    height: 48px;
+    align-items: center;
+    color: white;
+    border-radius: 24px;
+    margin: 10px;
+
+}
+
+.send-button:hover{
+    cursor: pointer;
 }

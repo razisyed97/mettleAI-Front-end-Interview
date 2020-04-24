@@ -50,45 +50,70 @@ const styles = {
     }
 }
 
+const colours = [
+    "#25A575",
+    "#2595A5",
+    "#3A719B",
+    "#254B7A",
+    "#142B58"
+]
 
 class Card extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             autocomplete : [],
-            address : ""
+            address : "",
+            data : {
+                firstName : "",
+                lastName : "",
+                dateOfBirth : "",
+                contactLanguage : "",
+                phone : "",
+                email : "",
+                address : "",
+                notesReason : ""
+            }
         }
     }
- 
     handleChange = address => {
-        this.setState({ address });
+        var temp = {}
+        temp.target = {}
+        temp.target.placeholder = "Address"
+        temp.target.value = address
+
+        this.updateData(temp)
+
+        this.setState({ address : address});
     };
     handleSelect = address => {
-    geocodeByAddress(address)
-        .then(results => getLatLng(results[0]))
-        .then(latLng => console.log('Success', latLng))
-        .catch(error => console.error('Error', error));
+        geocodeByAddress(address)
+            .then(results => getLatLng(results[0]))
+            .then(latLng => console.log('Success', latLng))
+            .catch(error => console.error('Error', error));
     };
-    test(e){
-        e.persist()
-        console.log(e.target.value)
 
-        if (e.target.value !== ""){
-            var requestOptions = {
-                method: 'GET',
-                redirect: 'follow'
-                };
-            
-            fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${e.target.value}&key=AIzaSyDeosvjuXnbDOLK0qsW-vBgqUoHIcRCkhY`, requestOptions)
-                .then(response => response.json())
-                .then(result => console.log(result))
-                .catch(error => console.log('error', error));
-    
-            // this.setState((prevState) => ({
-            //     autocomplete: [...prevState.autocomplete, e.target.value]
-            //   }));
-            // console.log(this.state.autocomplete)
+
+    updateData(e){
+        var field = e.target.placeholder.replace(/\s/g, '')
+        var newData = e.target.value
+        var data = this.state.data
+        const possibilities = ["FirstName", "LastName", "DateofBirth", "ContactLanguage", "Phone", "Email", "Address", "Notes/Reason"]
+        //console.log(field)
+        if (possibilities.includes(field)){
+            for (let [key, value] of Object.entries(data)) {
+                if (key.toLowerCase() == field.toLowerCase()){
+                    //console.log("hi")
+                    data[key] = newData
+                }
+                if (field.toLowerCase() == "notes/reason"){
+                    data.notesReason = newData
+                }
+            }
         }
+        this.setState({data : data})
+        //console.log(data)
+        this.props.updateForms(data, this.props.colour)
     }
 
     render(){
@@ -97,19 +122,23 @@ class Card extends Component{
             <ExpansionPanel
             square={false}
             className={classes.container}
+            defaultExpanded={true}
             >
                 <ExpansionPanelSummary
                  expandIcon={<ExpandMoreIcon />}
                  aria-controls="panel1a-content"
                  classes={{root : classes.root, content : classes.content, expanded : classes.expanded}}
                 >
-                    <div className="panelcard-icon"></div>
+                    <div className="panelcard-icon" style={{background : colours[this.props.colour]}}>
+                        {this.props.colour + 1}
+                    </div>
                     <div className="panelcard-name">Hello</div>
                     <div className="panelcard-filler"></div>
                     <div className="panelcard-trash">
                         <IconButton 
                             aria-label="delete" 
-                            onClick={(event) => event.stopPropagation()}
+                            colour={this.props.colour}
+                            onClick={() => this.props.delete(this.props.colour)}
                             onFocus={(event) => event.stopPropagation()}
                         >
                             <DeleteIcon fontSize="small" />
@@ -117,15 +146,19 @@ class Card extends Component{
                     </div>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <form className="panelcard-form">
+                    <form 
+                    className="panelcard-form"
+                    >
                         <div className="panelcard-textfield-lg">
                             <div className="panelcard-textfield-sm">
                                 <TextField
                                 color="primary"
                                 required
+                                value={this.props.formData.firstName || ""}
                                 label="required"
                                 placeholder="First Name"
                                 fullWidth
+                                onChange={(e) => this.updateData(e)}
                                 InputProps={{
                                     startAdornment: (
                                     <InputAdornment position="start">
@@ -137,11 +170,13 @@ class Card extends Component{
                             </div>
                             <div className="panelcard-textfield-sm">
                                 <TextField
+                                value={this.props.formData.lastName || ""}
                                 required
                                 id="standard-required"
                                 label="required"
                                 placeholder="Last Name"
                                 fullWidth
+                                onChange={(e) => this.updateData(e)}
                                 InputProps={{
                                     startAdornment: (
                                     <InputAdornment position="start">
@@ -155,11 +190,13 @@ class Card extends Component{
                         <div className="panelcard-textfield-lg">
                             <div className="panelcard-textfield-sm">
                                 <TextField
+                                value={this.props.formData.dateOfBirth || ""}
                                 required
                                 label="required"
                                 id="standard-required"
                                 placeholder="Date of Birth"
                                 fullWidth
+                                onChange={(e) => this.updateData(e)}
                                 InputProps={{
                                     startAdornment: (
                                     <InputAdornment position="start">
@@ -171,11 +208,13 @@ class Card extends Component{
                             </div>
                             <div className="panelcard-textfield-sm">
                                 <TextField
+                                value={this.props.formData.contactLanguage || ""}
                                 required
                                 label="required"
                                 id="standard-required"
                                 placeholder="Contact Language"
                                 fullWidth
+                                onChange={(e) => this.updateData(e)}
                                 InputProps={{
                                     startAdornment: (
                                     <InputAdornment position="start">
@@ -189,11 +228,13 @@ class Card extends Component{
                         <div className="panelcard-textfield-lg">
                             <div className="panelcard-textfield-sm">
                                 <TextField
+                                value={this.props.formData.phone || ""}
                                 required
                                 label="required"
                                 id="standard-required"
                                 placeholder="Phone"
                                 fullWidth
+                                onChange={(e) => this.updateData(e)}
                                 InputProps={{
                                     startAdornment: (
                                     <InputAdornment position="start">
@@ -205,11 +246,13 @@ class Card extends Component{
                             </div>
                             <div className="panelcard-textfield-sm">
                                 <TextField
+                                value={this.props.formData.email || ""}
                                 required
                                 label="required"
                                 id="standard-required"
                                 placeholder="Email"
                                 fullWidth
+                                onChange={(e) => this.updateData(e)}
                                 InputProps={{
                                     startAdornment: (
                                     <InputAdornment position="start">
@@ -231,8 +274,10 @@ class Card extends Component{
                                 <TextField
                                 label="required"
                                 required
+                                value={this.props.formData.address || ""}
                                 id="standard-required"
-                                autocomplete={false}
+                                autoComplete="off"
+                                onChange={(e) => this.updateData(e)}
                                 InputProps={{
                                     startAdornment: (
                                     <InputAdornment position="start">
@@ -271,21 +316,6 @@ class Card extends Component{
                             </div>
                             )}
                         </PlacesAutocomplete>
-                            {/*
-                            <TextField
-                            label="required"
-                            required
-                            id="standard-required"
-                            InputProps={{
-                                startAdornment: (
-                                <InputAdornment position="start">
-                                    <SearchIcon />
-                                </InputAdornment>
-                                ),
-                            }}
-                            placeholder="Address"
-                            fullWidth
-                        />*/}
                         </div> 
                         <div className="panelcard-textfield-lg">
                         <Autocomplete
@@ -296,11 +326,12 @@ class Card extends Component{
                         fullWidth
                         renderInput={(params) => (
                             <TextField
+                            value={this.props.formData.notesReason || ""}
                             {...params}
                             id="standard-textarea"
                             placeholder="Notes/Reason"
                             fullWidth
-                            onChange={(e) => this.test(e)}
+                            onChange={(e) => this.updateData(e)}
                             InputProps={{ ...params.InputProps, type: 'search' }}
                             />
                         )}
