@@ -11,7 +11,7 @@
 - Create more intuitive behaviour for form expansion when deleting a MUI expansion form.
 - Implement tighter form validation. Eg: date is properly formatted or validating a real email
 - More specific error message alert regarding missing required fields
-- Add button animations for adding, sending, and deleting a form
+- Add button animations for adding, sending, and deleting a form. This includes disabled button states. 
 - Create a more user friendly experience when using autocomplete to fill in address field
 - Hide my api key when deploying
 
