@@ -1,25 +1,27 @@
 # mettleAI Front-End Developer Intern Interview
 
-## Interview Task
+## Assumptions
 
-Build the Patient Referral Form using this [design spec](https://www.figma.com/file/XIHFNbIXykq8KosWEIryhoRJ/Patient-Referral-Form-interview?node-id=0%3A1).
+- Build a one page web application where data can be inputed to a maximum of 5 forms.
+- Create features only described in the design spec and readme
 
-There is no need to build any backend (api layer, server, database). For simulating form submission, you can do a POST to /api/referrals
+## Next Steps
 
+- Use redux to keep track of user data if this project were to get extended into a full web app
+- Create more intuitive behaviour for form expansion when deleting a MUI expansion form.
+- Implement tighter form validation. Eg: date is properly formatted or validating a real email
+- More specific error message regarding missing required fields
+- Add button animations for adding, sending, and deleting a form
+- Create more user friendly experience when using autocomplete to fill in address field
 
-## Duration
+## How to run
 
-Up to 8 hours. We do not expect you to complete the assessment in this time.
+1. Make sure to have node properly installed with node package manager as this is needed to install dev dependencies
 
-## Submission
-1.  Fork this repo
-2.  Build Patient Referral Form. Suggested libraries
-    -  Material UI components - [https://material-ui.com/](https://material-ui.com/)
-    -  Address lookup - [https://www.npmjs.com/package/react-places-autocomplete](https://www.npmjs.com/package/react-places-autocomplete)
-4.  Submit a Pull Request (PR)
-5.  In the PR, include a README that includes the following:
-    -  If you made any assumptions, what are they
-    - Outline what else needs to be done if given more time
-    - Instructions on how to run it
-6. Send via email to razi@mettleai.com 
+2. Clone repo
 
+3. Cd into the root folder where package.json is through the terminal.
+
+4. Run: npm install (this will likely take some time)
+
+5. Run: npm start

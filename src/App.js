@@ -4,15 +4,13 @@ import './App.css';
 
 import Referral from './components/Referral'
 import Navbar from './components/Navbar'
-import Footer from './components/Footer'
 
-import BrowserRouter from "react-router-dom/BrowserRouter";
-import Route from 'react-router-dom/Route'
-import Switch from 'react-router-dom/Switch'
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import {MuiThemeProvider} from '@material-ui/core/styles'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 
+// Create a theme with colour palette so this can be applied to MUI textfields
 const THEME = createMuiTheme({
   typography: {
    "fontFamily": "'Montserrat', sans-serif;",
@@ -32,16 +30,16 @@ class App extends Component {
     return (
       <div className="app-div">
         <MuiThemeProvider theme={THEME}>
-
           <BrowserRouter>
             <Navbar/>
             <Switch>     
-              <Route to="/" component={Referral}/>
+              <Route 
+              to="/" 
+              component={Referral}
+              />
             </Switch>
-            <Footer/>
           </BrowserRouter>
         </MuiThemeProvider>
-
       </div>
  
     );

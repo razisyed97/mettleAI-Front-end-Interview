@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 
+import "./Card.css"
+
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
-  } from 'react-places-autocomplete';
+} from 'react-places-autocomplete';
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -11,7 +13,6 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -25,6 +26,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import { withStyles } from '@material-ui/core/styles';
 
+// MUI styling
 const styles = {
     root : {
         paddingLeft: "0px",
@@ -46,10 +48,12 @@ const styles = {
     },
     container : {
         margin: "20px 0px 20px 0px",
-        borderRadius : "4px"
+        borderRadius : "4px",
+        width: "fit-content"
     }
 }
 
+// Colour Palette
 const colours = [
     "#25A575",
     "#2595A5",
@@ -72,20 +76,22 @@ class Card extends Component{
                 phone : "",
                 email : "",
                 address : "",
-                notesReason : ""
-            }
+                notesReason : "",
+            },
+            expanded : this.props.address
         }
     }
 
-
+    // Alternative to Componentwillreceieveprops to fix a
+    // bug with receiving updated props
     static getDerivedStateFromProps(nextProps, prevState){
         if(nextProps.formData !== prevState.data){
-          return { data: nextProps.formData, address : nextProps.formData.address};
+          return { data: nextProps.formData, address : nextProps.formData.address, expanded : nextProps.expanded };
        }
        else return null;
     }
 
-
+    // React Autocomplete Component
     handleChange = address => {
         var temp = {}
         temp.target = {}
@@ -93,9 +99,10 @@ class Card extends Component{
         temp.target.value = address
 
         this.updateData(temp)
-
         this.setState({ address : address});
     };
+
+    // React Autocomplete Component
     handleSelect = address => {
         geocodeByAddress(address)
             .then(results => getLatLng(results[0]))
@@ -105,36 +112,63 @@ class Card extends Component{
 
 
     updateData(e){
+        // To update the state of Card component and then pass data to parent Referral component
         var field = e.target.placeholder.replace(/\s/g, '')
         var newData = e.target.value
         var data = this.state.data
         const possibilities = ["FirstName", "LastName", "DateofBirth", "ContactLanguage", "Phone", "Email", "Address", "Notes/Reason"]
-        //console.log(field)
-        console.log(data)
+
+        // Simple field validation check
         if (possibilities.includes(field)){
-            for (let [key, value] of Object.entries(data)) {
-                if (key.toLowerCase() == field.toLowerCase()){
-                    console.log("hi")
-                    console.log(newData)
+            for (let [key] of Object.entries(data)) {
+                if (key.toLowerCase() === field.toLowerCase()){
                     data[key] = newData
-                }
-                if (field.toLowerCase() == "notes/reason"){
+                } 
+                // To account for / in string
+                if (field.toLowerCase() === "notes/reason"){
                     data.notesReason = newData
-                }
+                } 
             }
         }
-        //this.setState({data : data})
-        console.log(data)
-        this.props.updateForms(data, this.props.colour)
+        // Pass data to callback from Referral parent component
+        //
+        // this.props.colour represents the numbering and colour of 
+        // the forms, which also represent the index of the form in 
+        // Referral's state, so it is necessary to pass it in to the callback
+        //
+        // this.state.expanded represent if the form is expanded or not
+        this.props.updateForms(data, this.props.colour, this.state.expanded)
+    }
+
+    onExpandChange = (event, expanded) => {
+        // To account for the coloured square representing form order's borderRadius on expansion
+        this.setState({expanded : expanded})
+        if (expanded === true){
+            document.getElementsByClassName("panelcard-icon")[this.props.colour].style.borderBottomLeftRadius = "0px";
+        }
+        else{
+            document.getElementsByClassName("panelcard-icon")[this.props.colour].style.borderBottomLeftRadius = "4px";
+        }
+      }
+
+    autocomplete = (e) => {
+        // To update address values from the React Autocomplete component to Referral parent component
+        // since the Autocomplete component's behaviour was different with the MUI textfield.
+        // it just formats the data and then calls this.updateData()
+        e.target.placeholder = "Address"
+        e.target.value = e.target.textContent
+        this.updateData(e) 
     }
 
     render(){
-        const { classes } = this.props;
+        // Deconstruct classes to use MUI classes
+        const { classes } = this.props; 
         return(
             <ExpansionPanel
             square={false}
             className={classes.container}
-            defaultExpanded={true}
+            defaultExpanded={this.props.expanded}
+            onChange={this.onExpandChange}
             >
                 <ExpansionPanelSummary
                  expandIcon={<ExpandMoreIcon />}
@@ -144,7 +178,7 @@ class Card extends Component{
                     <div className="panelcard-icon" style={{background : colours[this.props.colour]}}>
                         {this.props.colour + 1}
                     </div>
-                    <div className="panelcard-name">{this.props.formData.firstName ? this.props.formData.firstName : "New Referral"}</div>
+                    <div className="panelcard-name">{this.props.formData.firstName || this.props.formData.lastName ? this.props.formData.firstName + " " + this.props.formData.lastName : "New Referral"}</div>
                     <div className="panelcard-filler"></div>
                     <div className="panelcard-trash">
                         <IconButton 
@@ -164,7 +198,6 @@ class Card extends Component{
                         <div className="panelcard-textfield-lg">
                             <div className="panelcard-textfield-sm">
                                 <TextField
-                                color="primary"
                                 required
                                 value={this.props.formData.firstName}
                                 label="required"
@@ -275,7 +308,7 @@ class Card extends Component{
                         </div>
                         <div className="panelcard-textfield-lg">
                         <PlacesAutocomplete
-                            value={this.state.address}
+                            value={this.state.data.address}
                             onChange={this.handleChange}
                             onSelect={this.handleSelect}
                         >
@@ -284,7 +317,6 @@ class Card extends Component{
                                 <TextField
                                 label="required"
                                 required
-                                value={this.state.address ? this.state.address : this.props.formData.address}
                                 id="standard-required"
                                 autoComplete="off"
                                 onChange={(e) => this.updateData(e)}
@@ -317,6 +349,7 @@ class Card extends Component{
                                         className,
                                         style,
                                         })}
+                                        placeholder="Address" value={suggestion.description} onClick={(e)=> this.autocomplete(e)}
                                     >
                                         <span>{suggestion.description}</span>
                                     </div>
@@ -343,6 +376,5 @@ class Card extends Component{
         )
     }
 }
-
 
 export default withStyles(styles)(Card);
