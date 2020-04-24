@@ -16,7 +16,7 @@
 
 ## How to run
 
-1. Make sure to have node properly installed with node package manager as this is needed to install dev dependencies
+1. Make sure to have node runtime environment configured properly with node package manager as this is needed to install dev dependencies
 
 2. Clone repo
 
@@ -26,4 +26,4 @@
 
 5. Run: npm start
 
-if an error occurs about a dependency not being installed. Run: npm install <DEPENDENCY>
+if an error occurs about a dependency not being installed. Run: npm install YOURDEPENDENCY
