@@ -12,7 +12,7 @@
 - Implement tighter form validation. Eg: date is properly formatted or validating a real email
 - More specific error message alert regarding missing required fields
 - Add button animations for adding, sending, and deleting a form. This includes disabled button states. 
-- Create a more user friendly experience when using autocomplete to fill in address field
+- Create a more user friendly experience when using autocomplete to fill in address field (enter button must be pressed to hide the autocomplete forms)
 - Hide my api key when deploying
 - Loading icon while asynchronous request is being processed by server
 
