@@ -79,63 +79,66 @@ class Referral extends Component {
     }
 
     submitData(){
-
-        var data = this.state.formData
-        var valid = true
-
-        // Check client side data before sending request
-        // More detailed checks about data can also be done here. eg: check if date is valid
-        for (var index = 0; index < data.length; index++) { 
-            if (data[index].firstName === ""){
-                valid = false
-            }else if (data[index].lastName === "") {
-                valid = false
-            }else if (data[index].dateOfBirth === "") {
-                valid = false
-            }else if (data[index].contactLanguage === "") {
-                valid = false
-            }else if (data[index].phone === "") {
-                valid = false
-            }else if (data[index].email === "") {
-                valid = false
-            }else if (data[index].address === "") {
-                valid = false
-            }               
-        } 
-
-        //  POST Request at /api/referrals
-
-        //  if (valid == true){
-        //     const url = "/api/referrals"
-        //     const options = {
-        //         method: 'POST',
-        //         headers: {
-        //         'Content-type': 'application/json'
-        //         },
-        //         body: data
-        //     }
-            
-        //     fetch(url, options)
-        //     .then((response) => {
-        //     // handle successful form upload
-        //     })
-        //     .catch(err => {
-        //     // handle unsuccessful form upload
-        //     })
-        //  }
         
+        var data = this.state.formData
+        if (data.length > 0){
+            
+            var valid = true
 
-        // For demo purposes
-        console.log(this.state.formData)
-        if (valid){
-            this.setState({ formData : [] })
+            // Check client side data before sending request
+            // More detailed checks about data can also be done here. eg: check if date is valid
+            for (var index = 0; index < data.length; index++) { 
+                if (data[index].firstName === ""){
+                    valid = false
+                }else if (data[index].lastName === "") {
+                    valid = false
+                }else if (data[index].dateOfBirth === "") {
+                    valid = false
+                }else if (data[index].contactLanguage === "") {
+                    valid = false
+                }else if (data[index].phone === "") {
+                    valid = false
+                }else if (data[index].email === "") {
+                    valid = false
+                }else if (data[index].address === "") {
+                    valid = false
+                }               
+            } 
+
+            //  POST Request at /api/referrals
+
+            //  if (valid == true){
+            //     const url = "/api/referrals"
+            //     const options = {
+            //         method: 'POST',
+            //         headers: {
+            //         'Content-type': 'application/json'
+            //         },
+            //         body: data
+            //     }
+                
+            //     fetch(url, options)
+            //     .then((response) => {
+            //     // handle successful form upload
+            //     })
+            //     .catch(err => {
+            //     // handle unsuccessful form upload
+            //     })
+            //  }
+            
+
+            // For demo purposes
+            console.log(this.state.formData)
+            if (valid){
+                this.setState({ formData : [] })
+            }
+
+            this.setState({alert : {
+                num : data.length,
+                success : valid ? "success" : "error"
+            }})
+            document.getElementsByClassName("success-alert")[0].style.display = "block";
         }
-
-        this.setState({alert : {
-            num : data.length,
-            success : valid ? "success" : "error"
-        }})
-        document.getElementsByClassName("success-alert")[0].style.display = "block";
     }
 
     render(){
