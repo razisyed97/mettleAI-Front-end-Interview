@@ -14,6 +14,7 @@
 - Add button animations for adding, sending, and deleting a form. This includes disabled button states. 
 - Create a more user friendly experience when using autocomplete to fill in address field
 - Hide my api key when deploying
+- Loading icon while asynchronous request is being processed by server
 
 ## How to run
 
