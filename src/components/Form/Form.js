@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AddressLookup from "./AddressLookup";
 import axios from "axios";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -197,9 +196,6 @@ export default function Form(props) {
                 />
               </Grid>
               <Grid item xs={12}>
-                <AddressLookup
-                  onChange={(event) => setAddress(event.target.value)}
-                />
                 {/* <TextField
                   required
                   fullWidth
