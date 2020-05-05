@@ -1,0 +1,31 @@
+.add-patient {
+  padding: 0;
+  padding-bottom: 50px;
+  border: none;
+  background: none;
+  font-size: small;
+  color: black;
+}
+
+.background-card {
+  padding: 50px 50px;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.ref-heading {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.sub-ref-heading {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+} 
