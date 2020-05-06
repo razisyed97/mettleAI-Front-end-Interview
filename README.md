@@ -16,6 +16,6 @@
 
 1. Fork this repository, then clone your fork of this repository.
 2. Install dependencies using the npm install command.
-3. Start the web server using the npm run local command. The app will be served at http://localhost:3000/.
+3. Start the web server using the npm start. The app will be served at http://localhost:3000/.
 
 
