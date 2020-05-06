@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Form from "./Form";
 import Fab from "@material-ui/core/Fab";
 import { makeStyles } from "@material-ui/core/styles";
-import "./FormCollection.css";
+import "./FormManager.css";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -47,6 +48,21 @@ export default function FormManager() {
     patients.length < 5 && setPatients([...patients, newPatient]);
   };
 
+  // After saving individual forms, submitPatient performs axios req
+  // sending patient data to server /api/referrals
+  const submitPatient = () => {
+    axios
+      .post("/api/referrals", patients)
+      .then((response) => {
+        console.log(response);
+      })
+      .then(
+        alert(
+          "Success! You have submitted 5 pending referrals. You will be notified once they've been approved"
+        )
+      );
+  };
+
   // Saves patient object to new patient array
   const savePatient = (
     index,
@@ -73,7 +89,7 @@ export default function FormManager() {
     setPatients(allPatients);
   };
 
-  // Removes patient from new patient array
+  // Removes patient from new patient array using index
   const deletePatient = (index) => {
     const allPatient = [...patients];
     allPatient.splice(index, 1);
@@ -107,6 +123,7 @@ export default function FormManager() {
         aria-label="add"
         className={classes.margin}
         type="submit"
+        onClick={() => submitPatient()}
       >
         Send Referrals
       </Fab>

@@ -1,15 +1,19 @@
 # mettleAI Front-End Developer Intern Interview
 
-## Interview Task
+## Assumptions
 
-Build the Patient Referral Form using this [design spec](https://www.figma.com/file/XIHFNbIXykq8KosWEIryhoRJ/Patient-Referral-Form-interview?node-id=0%3A1).
+* Create a Patient Referral Form according to the specifications provided using Material UI and Use Places Autocomplete. 
+* Add Save and Delete buttons to the intake form instead of the expansional panel. Save button allows user to update their form prior to final submission. 
+* 
 
-There is no need to build any backend (api layer, server, database). For simulating form submission, you can do a POST to /api/referrals
+## What needs to be done given more time ⏰
 
+* 
 
-## Duration
+## 💻 Getting Started 💻
 
-Up to 8 hours. We do not expect you to complete the assessment in this time.
+1. Install dependencies using the npm install command.
+2. Start the web server using the npm start command. The app will be served at http://localhost:3000/.
 
 ## Submission
 1.  Fork this repo

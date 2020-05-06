@@ -1,14 +1,16 @@
 import React from "react";
 import "./App.css";
 import Header from "./components/UI/Header";
-import Form from "./components/Form/Form";
+import FormManager from "./components/Form/FormManager";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <main className="App-header">
-        <Form />
+        <div className="body">
+          <FormManager />
+        </div>
       </main>
     </div>
   );

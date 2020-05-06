@@ -46,10 +46,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Form(props) {
+  // Props from Form Manager that index, save, and delete patient referrals
   const { index, savePatient, deletePatient, patient } = props;
 
   const classes = useStyles();
 
+  // Declare new state variables for form inputs
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
@@ -60,20 +62,22 @@ export default function Form(props) {
   const [notes, setNotes] = useState("");
   const [expanded, setExpanded] = useState("panel1");
 
+  // Saves patient data to form manager via savePatient prop
+
   const handleSave = () => {
     // Error handling
-    if (
-      !firstName ||
-      !lastName ||
-      !dateOfBirth ||
-      !contactLanguage ||
-      !phone ||
-      !email ||
-      !address
-    ) {
-      alert("Please fill out all fields");
-      return;
-    }
+    // if (
+    //   !firstName ||
+    //   !lastName ||
+    //   !dateOfBirth ||
+    //   !contactLanguage ||
+    //   !phone ||
+    //   !email ||
+    //   !address
+    // ) {
+    //   alert("Please fill out all fields");
+    //   return;
+    // }
     savePatient(
       index,
       firstName,
@@ -100,6 +104,9 @@ export default function Form(props) {
     setExpanded(newExpanded ? panel : false);
   };
 
+  // Form 1-5 background colors
+  const colors = ["#25A575", "#2595A5", "#3A719B", "#254B7A", "#142B58"];
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -113,13 +120,18 @@ export default function Form(props) {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            {/* <div className="index-background">{index + 1}</div>
+            <div
+              className="index-background"
+              style={{ background: colors[index] }}
+            >
+              {index + 1}
+            </div>
             <div className="referral-title">
               {" "}
               {patient.firstName && patient.lastName
                 ? `${patient.firstName} ${patient.lastName}`
                 : "New Referral Patient"}{" "}
-            </div> */}
+            </div>
             {/* <IconButton
               aria-label="delete"
               className={classes.margin}
