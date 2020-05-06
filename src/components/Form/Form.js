@@ -58,22 +58,22 @@ export default function Form(props) {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [notes, setNotes] = useState("");
+  const [expanded, setExpanded] = useState("panel1");
 
-  // React Autocomplete
-  // const handleChange = (address) => {
-  //   setAddress(address);
-  // };
-
-  // // React Autocomplete
-  // const handleSelect = (address) => {
-  //   geocodeByAddress(address)
-  //     .then((results) => getLatLng(results[0]))
-  //     .then((latLng) => console.log("Success", latLng))
-  //     .catch((error) => console.error("Error", error));
-  // };
-
-  // Saves patient data to form manager via savePatient prop
   const handleSave = () => {
+    // Error handling
+    if (
+      !firstName ||
+      !lastName ||
+      !dateOfBirth ||
+      !contactLanguage ||
+      !phone ||
+      !email ||
+      !address
+    ) {
+      alert("Please fill out all fields");
+      return;
+    }
     savePatient(
       index,
       firstName,
@@ -85,13 +85,29 @@ export default function Form(props) {
       address,
       notes
     );
+    setExpanded(false);
+  };
+
+  // Sets patient address. Function called in address
+  // lookup component via prop
+  const updateAddress = (address) => {
+    setAddress(address);
+  };
+
+  // Material UI Expansion panel control -
+  // ensures panel is expanded upon page load
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
   };
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <ExpansionPanel>
+        <ExpansionPanel
+          expanded={expanded === "panel1"}
+          onChange={handleChange("panel1")}
+        >
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
@@ -223,59 +239,7 @@ export default function Form(props) {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <AddressLookup />
-                      {/* <PlacesAutocomplete
-                        value={address}
-                        onChange={handleChange}
-                        onSelect={handleSelect}
-                      >
-                        {({
-                          getInputProps,
-                          suggestions,
-                          getSuggestionItemProps,
-                          loading,
-                        }) => (
-                          <div>
-                            <TextField
-                              onChange={handleChange}
-                              required
-                              fullWidth
-                              {...getInputProps({
-                                label: "Address",
-                                className: "location-search-input",
-                              })}
-                            />
-                            <div className="autocomplete-dropdown-container">
-                              {loading && <div>Loading...</div>}
-                              {suggestions.map((suggestion) => {
-                                const className = suggestion.active
-                                  ? "suggestion-item--active"
-                                  : "suggestion-item";
-                                // inline style for demonstration purpose
-                                const style = suggestion.active
-                                  ? {
-                                      backgroundColor: "white",
-                                      cursor: "pointer",
-                                    }
-                                  : {
-                                      backgroundColor: "white",
-                                      cursor: "pointer",
-                                    };
-                                return (
-                                  <div
-                                    {...getSuggestionItemProps(suggestion, {
-                                      className,
-                                      style,
-                                    })}
-                                  >
-                                    <span>{suggestion.description}</span>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
-                      </PlacesAutocomplete> */}
+                      <AddressLookup updateAddress={updateAddress} />
                     </Grid>
                     <Grid item xs={12}>
                       <TextField
@@ -294,7 +258,7 @@ export default function Form(props) {
                         color="primary"
                         aria-label="add"
                         className={classes.margin}
-                        onClick={() => handleSave()}
+                        onClick={() => handleSave(index)}
                       >
                         Save
                       </Fab>
