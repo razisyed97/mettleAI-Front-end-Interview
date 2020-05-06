@@ -17,6 +17,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import DeleteIcon from "@material-ui/icons/Delete";
 import Fab from "@material-ui/core/Fab";
 import "./Form.css";
 
@@ -66,18 +67,18 @@ export default function Form(props) {
 
   const handleSave = () => {
     // Error handling
-    // if (
-    //   !firstName ||
-    //   !lastName ||
-    //   !dateOfBirth ||
-    //   !contactLanguage ||
-    //   !phone ||
-    //   !email ||
-    //   !address
-    // ) {
-    //   alert("Please fill out all fields");
-    //   return;
-    // }
+    if (
+      !firstName ||
+      !lastName ||
+      !dateOfBirth ||
+      !contactLanguage ||
+      !phone ||
+      !email ||
+      !address
+    ) {
+      alert("Please fill out all fields");
+      return;
+    }
     savePatient(
       index,
       firstName,
@@ -132,14 +133,6 @@ export default function Form(props) {
                 ? `${patient.firstName} ${patient.lastName}`
                 : "New Referral Patient"}{" "}
             </div>
-            {/* <IconButton
-              aria-label="delete"
-              className={classes.margin}
-              size="small"
-              onClick={() => deletePatient(index)}
-            >
-              <DeleteIcon fontSize="small" />
-            </IconButton>*/}
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Typography>
