@@ -3,15 +3,14 @@
 ## Assumptions 🤔
 
 * Create a Patient Referral Form according to the specifications provided using Material UI and Use Places Autocomplete. 
-* Add 'Save' button to the intake form. Save button allows user to save or update their form prior to final submission creating a more intiuitive feel and UI experience. 
+* Add 'Save' button to the intake form. Save button allows user to save or update their form prior to final submission creating a more intiuitive UI experience. 
 
 ## If I had more time ⏰:
 
 * Dynamically render success and error messages. 
-* Better form field (ex. email format, password, DOB format) and form submit validation. 
-* Add 'Saving' spinner when user clicks save. 
-* Use redux to manage state of data for app scalability. 
-* Enhance styling on form component.
+* Use redux to manage state of data for application scalability. 
+* Better form field validation (ex. email format, password, DOB format). 
+* Enhance styling on form component (ex. add 'saving' spinner, form placement and icons).
 
 ## 💻 Getting Started 💻
 
