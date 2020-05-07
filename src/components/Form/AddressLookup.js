@@ -7,7 +7,7 @@ import usePlacesAutocomplete, {
 import useOnclickOutside from "react-cool-onclickoutside";
 
 const PlacesAutocomplete = (props) => {
-  const { updateAddress } = props;
+  const { updateAddress, address } = props;
 
   const {
     ready,
@@ -70,7 +70,7 @@ const PlacesAutocomplete = (props) => {
       <TextField
         required
         fullWidth
-        value={value}
+        value={address ? address : value}
         onChange={handleInput}
         disabled={!ready}
         placeholder="Address*"
