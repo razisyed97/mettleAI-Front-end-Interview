@@ -1,0 +1,38 @@
+.ref-heading {
+  text-align: center;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  margin: 5%;
+}
+
+.sub-ref-heading {
+  text-align: center;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.add-patient {
+  padding: 20px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  padding-bottom: 30px;
+  border: none;
+  background: none;
+  font-size: small;
+  color: black;
+}
+
+.add-patient-message{
+  font-family: Montserrat;
+  text-align: center;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 5px;
+  background-color: lightskyblue;
+}

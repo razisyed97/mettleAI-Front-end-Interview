@@ -1,0 +1,29 @@
+.background-card {
+  padding: 50px 50px;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.index-background-colors{
+  display: inline-block;
+  padding-top: 5px;
+  text-align: center;
+  margin-right: 10px;
+  width: 35px;
+  color: white;
+  font-size: medium;
+  border-radius: 5px;
+}
+
+.referral-title {
+  font-size: medium;
+  font-family: Montserrat;
+  margin-top: 5px;
+}
+
+.trash-icon {
+  margin-bottom: 5px !important;
+  
+}

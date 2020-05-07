@@ -1,0 +1,9 @@
+.header {
+  font-family: Montserrat;
+  background-color: white;
+  display: inline-block;
+    width: 100%;
+  left: 0px;
+  top: 0px;
+  color: black; 
+}

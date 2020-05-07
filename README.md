@@ -1,25 +1,21 @@
 # mettleAI Front-End Developer Intern Interview
 
-## Interview Task
+## Assumptions 🤔
 
-Build the Patient Referral Form using this [design spec](https://www.figma.com/file/XIHFNbIXykq8KosWEIryhoRJ/Patient-Referral-Form-interview?node-id=0%3A1).
+* Create a Patient Referral Form according to the specifications provided using Material UI and Use Places Autocomplete. 
+* Add 'Save' button to the intake form. Save button allows user to save or update their form prior to final submission creating a more intiuitive UI experience. 
 
-There is no need to build any backend (api layer, server, database). For simulating form submission, you can do a POST to /api/referrals
+## If I had more time ⏰:
 
+* Dynamically render success and error messages. 
+* Use redux to manage state of data for application scalability. 
+* Better form field validation (ex. email format, password, DOB format). 
+* Enhance styling on form component (ex. add 'saving' spinner, form placement and icons).
 
-## Duration
+## 💻 Getting Started 💻
 
-Up to 8 hours. We do not expect you to complete the assessment in this time.
+1. Fork this repository, then clone your fork of this repository.
+2. Install dependencies using the npm install command.
+3. Start the web server using the npm start. The app will be served at http://localhost:3000/.
 
-## Submission
-1.  Fork this repo
-2.  Build Patient Referral Form. Suggested libraries
-    -  Material UI components - [https://material-ui.com/](https://material-ui.com/)
-    -  Address lookup - [https://www.npmjs.com/package/react-places-autocomplete](https://www.npmjs.com/package/react-places-autocomplete)
-4.  Submit a Pull Request (PR)
-5.  In the PR, include a README that includes the following:
-    -  If you made any assumptions, what are they
-    - Outline what else needs to be done if given more time
-    - Instructions on how to run it
-6. Send via email to razi@mettleai.com 
 
