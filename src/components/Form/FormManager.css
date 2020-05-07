@@ -27,3 +27,12 @@
   font-size: small;
   color: black;
 }
+
+.add-patient-message{
+  font-family: Montserrat;
+  text-align: center;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 5px;
+  background-color: lightskyblue;
+}

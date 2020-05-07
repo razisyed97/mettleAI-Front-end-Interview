@@ -58,7 +58,7 @@ export default function FormManager() {
       })
       .then(
         alert(
-          "Success! You have submitted 5 pending referrals. You will be notified once they've been approved"
+          `Success! You have submitted 5 pending referrals. You will be notified once they've been approved`
         )
       );
   };
@@ -98,21 +98,21 @@ export default function FormManager() {
 
   return (
     <div>
-      <container>
-        <p className="ref-heading">Referral Patient</p>
-        <p className="sub-ref-heading">
-          You can add up to 5 patients at a time
-        </p>
-      </container>
-      {patients.map((patient, index) => (
-        <Form
-          key={index}
-          index={index}
-          savePatient={savePatient}
-          deletePatient={deletePatient}
-          patient={patient}
-        />
-      ))}
+      <p className="ref-heading">Referral Patient</p>
+      <p className="sub-ref-heading">You can add up to 5 patients at a time</p>
+      {patients.length ? (
+        patients.map((patient, index) => (
+          <Form
+            key={index}
+            index={index}
+            savePatient={savePatient}
+            deletePatient={deletePatient}
+            patient={patient}
+          />
+        ))
+      ) : (
+        <p className="add-patient-message">Please add a Patient</p>
+      )}
       <button className="add-patient" onClick={() => initPatient()}>
         + ADD ANOTHER PATIENT
       </button>
