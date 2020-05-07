@@ -11,6 +11,7 @@
 * Better form field (ex. email format, password, DOB format) and form submit validation. 
 * Add 'Saving' spinner when user clicks save. 
 * Use redux to manage state of data for app scalability. 
+* Enhance styling on form component.
 
 ## 💻 Getting Started 💻
 

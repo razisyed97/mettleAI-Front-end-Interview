@@ -22,7 +22,9 @@ import Fab from "@material-ui/core/Fab";
 import "./Form.css";
 
 const useStyles = makeStyles((theme) => ({
-  root: { width: "100%" },
+  root: {
+    width: "100%",
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -161,8 +163,9 @@ export default function Form(props) {
             <div className="delete-icon">
               <IconButton
                 aria-label="delete"
-                className={classes.margin}
+                // className={classes.margin}
                 size="small"
+                position="end"
                 onClick={() => deletePatient(index)}
               >
                 <DeleteIcon fontSize="small" style={{ fill: "black" }} />
@@ -313,18 +316,6 @@ export default function Form(props) {
                         Save
                       </Fab>
                     </Grid>
-                    {/* <Grid item xs={12} sm={6}>
-                      <Fab
-                        variant="extended"
-                        size="medium"
-                        color="primary"
-                        aria-label="add"
-                        className={classes.margin}
-                        onClick={() => deletePatient(index)}
-                      >
-                        Delete
-                      </Fab>
-                    </Grid> */}
                   </Grid>
                 </div>
               </form>
