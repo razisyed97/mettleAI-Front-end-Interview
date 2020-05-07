@@ -6,7 +6,10 @@
   border-radius: 5px;
 }
 
-.index-background{
+.index-background-colors{
+  display: inline-block;
+  padding-top: 5px;
+  text-align: center;
   margin-right: 10px;
   width: 35px;
   color: white;
@@ -17,4 +20,10 @@
 .referral-title {
   font-size: medium;
   font-family: Montserrat;
+  margin-top: 5px;
+}
+
+.trash-icon {
+  margin-bottom: 5px !important;
+  
 }

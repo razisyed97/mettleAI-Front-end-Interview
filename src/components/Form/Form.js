@@ -1,6 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import AddressLookup from "./AddressLookup";
-import IconButton from "@material-ui/core/IconButton";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -17,6 +16,7 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Fab from "@material-ui/core/Fab";
 import "./Form.css";
@@ -63,22 +63,47 @@ export default function Form(props) {
   const [notes, setNotes] = useState("");
   const [expanded, setExpanded] = useState("panel1");
 
-  // Saves patient data to form manager via savePatient prop
+  // With every render useEffect detects whether the form is being passed a patient prop.
+  // If there is patient prop, set the state variables to the patient prop values which
+  // then show up in the form input
+  useEffect(() => {
+    if (patient) {
+      const {
+        firstName,
+        lastName,
+        dateOfBirth,
+        contactLanguage,
+        phone,
+        email,
+        address,
+        notes,
+      } = patient;
+      setFirstName(firstName);
+      setLastName(lastName);
+      setDateOfBirth(dateOfBirth);
+      setContactLanguage(contactLanguage);
+      setPhone(phone);
+      setEmail(email);
+      setAddress(address);
+      setNotes(notes);
+    }
+  }, [patient]);
 
+  // Saves patient data to form manager via savePatient prop
   const handleSave = () => {
     // Error handling
-    if (
-      !firstName ||
-      !lastName ||
-      !dateOfBirth ||
-      !contactLanguage ||
-      !phone ||
-      !email ||
-      !address
-    ) {
-      alert("Please fill out all fields");
-      return;
-    }
+    // if (
+    //   !firstName ||
+    //   !lastName ||
+    //   !dateOfBirth ||
+    //   !contactLanguage ||
+    //   !phone ||
+    //   !email ||
+    //   !address
+    // ) {
+    //   alert("Please fill out all fields");
+    //   return;
+    // }
     savePatient(
       index,
       firstName,
@@ -122,7 +147,7 @@ export default function Form(props) {
             id="panel1a-header"
           >
             <div
-              className="index-background"
+              className="index-background-colors"
               style={{ background: colors[index] }}
             >
               {index + 1}
@@ -132,6 +157,16 @@ export default function Form(props) {
               {patient.firstName && patient.lastName
                 ? `${patient.firstName} ${patient.lastName}`
                 : "New Referral Patient"}{" "}
+            </div>
+            <div className="delete-icon">
+              <IconButton
+                aria-label="delete"
+                className={classes.margin}
+                size="small"
+                onClick={() => deletePatient(index)}
+              >
+                <DeleteIcon fontSize="small" style={{ fill: "black" }} />
+              </IconButton>
             </div>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
@@ -154,6 +189,7 @@ export default function Form(props) {
                             </InputAdornment>
                           ),
                         }}
+                        value={firstName}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -171,6 +207,7 @@ export default function Form(props) {
                             </InputAdornment>
                           ),
                         }}
+                        value={lastName}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -188,6 +225,7 @@ export default function Form(props) {
                             </InputAdornment>
                           ),
                         }}
+                        value={dateOfBirth}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -207,6 +245,7 @@ export default function Form(props) {
                             </InputAdornment>
                           ),
                         }}
+                        value={contactLanguage}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -224,6 +263,7 @@ export default function Form(props) {
                             </InputAdornment>
                           ),
                         }}
+                        value={phone}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -241,10 +281,14 @@ export default function Form(props) {
                             </InputAdornment>
                           ),
                         }}
+                        value={email}
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <AddressLookup updateAddress={updateAddress} />
+                      <AddressLookup
+                        updateAddress={updateAddress}
+                        address={patient ? patient.address : ""}
+                      />
                     </Grid>
                     <Grid item xs={12}>
                       <TextField
@@ -254,9 +298,10 @@ export default function Form(props) {
                         type="notes"
                         id="notes"
                         onChange={(event) => setNotes(event.target.value)}
+                        value={notes}
                       />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                       <Fab
                         variant="extended"
                         size="medium"
@@ -268,7 +313,7 @@ export default function Form(props) {
                         Save
                       </Fab>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    {/* <Grid item xs={12} sm={6}>
                       <Fab
                         variant="extended"
                         size="medium"
@@ -279,7 +324,7 @@ export default function Form(props) {
                       >
                         Delete
                       </Fab>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </div>
               </form>
